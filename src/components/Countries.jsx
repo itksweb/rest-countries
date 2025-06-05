@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import CountryInfoCard from "./CountryInfoCard";
-import data from "../data.json";
+// import data from "../data.json";
 
 
 
-const Countries = () => {
+const Countries = ({data}) => {
   const [filteredData, setFilteredData] = useState([]);
   const [regions, setRegions] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -12,7 +12,7 @@ const Countries = () => {
   const [touched, setTouched] = useState(false);
 
   //set initial country data
-  useEffect(() => setFilteredData(data), []);
+  useEffect(() => setFilteredData(data), [data]);
 
   // set filtered or no filtered data
   useEffect(() => {
@@ -25,7 +25,7 @@ const Countries = () => {
           data
             .filter((item) => item.region === selectedInput)
             .filter((item) =>
-              item.name.toLowerCase().startsWith(searchInput.toLowerCase())
+              item.name.common.toLowerCase().startsWith(searchInput.toLowerCase())
             )
         );
       }
@@ -35,7 +35,7 @@ const Countries = () => {
       if (searchInput) {
         return setFilteredData(
           data.filter((item) =>
-            item.name.toLowerCase().startsWith(searchInput.toLowerCase())
+            item.name.common.toLowerCase().startsWith(searchInput.toLowerCase())
           )
         );
       }
@@ -69,7 +69,7 @@ const Countries = () => {
   let display = (
     <div className="flex justify-center flex-wrap">
       {filteredData.map((country) => (
-        <CountryInfoCard country={country} key={country.name} />
+        <CountryInfoCard country={country} key={country.name.common} />
       ))}
     </div>
   );
