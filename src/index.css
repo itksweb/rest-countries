@@ -24,9 +24,9 @@
 
 [data-theme="light"] {
   --bg-color: hsl(0, 0%, 99%);
-  /* --bgg-color:hsl(217, 61%, 90%); */
   --text-color: hsl(200, 15%, 8%);
   --ele-color: hsl(0, 100%, 100%);
+  --input-color:hsl(0, 0%, 50%);
 }
 
 [data-theme="dark"] {
@@ -51,3 +51,14 @@ body {
 .element-bg {
   background-color: var(--ele-color);
 }
+.element-color{
+  color: var(--text-color);
+}
+
+.inputi, #country-search::placeholder{
+  color: var(--input-color);
+}
+/* .custom-select{
+  position: relative;
+} */
+

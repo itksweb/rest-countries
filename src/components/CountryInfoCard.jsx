@@ -12,7 +12,7 @@ const CountryInfoCard = ({ country }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex justify-center px-4 py-6 max-sm:w-[90%] sm:w-[47%] md:w-[31%] lg:w-[23%]"
+      className="flex justify-center px-4 py-6 "
     >
       <Link to={`/countries/${name.common}`}>
         <div className="rounded-sm overflow-hidden shadow-lg transition-colors">

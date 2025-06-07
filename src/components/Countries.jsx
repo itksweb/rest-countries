@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import CountryInfoCard from "./CountryInfoCard";
+import SearchCountry from "./SearchCountry";
+import SelectCountry from "./SelectCountry";
 // import data from "../data.json";
 
-
-
-const Countries = ({data}) => {
+const Countries = ({ data }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [regions, setRegions] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -25,7 +25,9 @@ const Countries = ({data}) => {
           data
             .filter((item) => item.region === selectedInput)
             .filter((item) =>
-              item.name.common.toLowerCase().startsWith(searchInput.toLowerCase())
+              item.name.common
+                .toLowerCase()
+                .startsWith(searchInput.toLowerCase())
             )
         );
       }
@@ -65,9 +67,11 @@ const Countries = ({data}) => {
   if (!filteredData.length && !touched) {
     return <h2 className="text-xl text-center">loading ...</h2>;
   }
-
+ const flx = "flex justify-center flex-wrap"
+ const grd =
+   "grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
   let display = (
-    <div className="flex justify-center flex-wrap">
+    <div className={grd}>
       {filteredData.map((country) => (
         <CountryInfoCard country={country} key={country.name.common} />
       ))}
@@ -80,34 +84,21 @@ const Countries = ({data}) => {
       </div>
     );
   }
- 
 
   return (
     <div>
-      <div className="flex justify-between items-center w-full py-4 px-[5%] mb-7 ">
-        <input
-          type="search"
-          name="country-search"
-          id="country-search"
-          className="element-bg w-[33%] p-4 rounded-sm shadow-lg"
-          value={searchInput}
-          onChange={handleInputChange}
+      <div className="flex justify-between max-sm:flex-col max-sm:justify-center items-center w-full py-4 px-[5%] mb-7 gap-4 ">
+        <SearchCountry
+          searchInput={searchInput}
+          handleInputChange={handleInputChange}
         />
-        <select
-          name="country-filter"
-          id="country-filter"
-          className=" element-bg p-4 rounded-sm shadow-lg"
-          onChange={handleInputChange}
-          value={selectedInput}
-        >
-          <option value="">filter by region</option>
-          {regions.map((region) => (
-            <option value={region} key={region}>
-              {region}
-            </option>
-          ))}
-        </select>
+        <SelectCountry
+          regions={regions}
+          handleInputChange={handleInputChange}
+          selectedInput={selectedInput}
+        />
       </div>
+
       {display}
     </div>
   );
